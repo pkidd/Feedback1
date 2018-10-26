@@ -88,5 +88,17 @@ namespace Feedback1.Controllers
 		    return View(model);
 	    }
 
+
+	    public IActionResult TeamNetwork()
+	    {
+		    var model = new FeedbackRequest()
+		    {
+			    FromTeam = "Communications",
+			    ToTeam = "Your team",
+			    Title = "Request 1"
+		    };
+			return View(model);
+		}
+
 	}
 }

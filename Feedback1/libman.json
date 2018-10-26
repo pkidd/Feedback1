@@ -4,7 +4,35 @@
   "libraries": [
     {
       "library": "vis@4.21.0",
-      "destination": "wwwroot/vis/"
+      "destination": "wwwroot/vis/",
+      "files": [
+        "vis.min.js",
+        "vis-graph3d.min.js",
+        "vis-network.min.css",
+        "vis-network.min.js",
+        "vis-timeline-graph2d.min.css",
+        "vis-timeline-graph2d.min.js",
+        "vis.css",
+        "vis.js",
+        "vis.js.map",
+        "vis.map",
+        "vis.min.css",
+        "img/network/acceptDeleteIcon.png",
+        "img/network/addNodeIcon.png",
+        "img/network/backIcon.png",
+        "img/network/connectIcon.png",
+        "img/network/cross.png",
+        "img/network/cross2.png",
+        "img/network/deleteIcon.png",
+        "img/network/downArrow.png",
+        "img/network/editIcon.png",
+        "img/network/leftArrow.png",
+        "img/network/minus.png",
+        "img/network/plus.png",
+        "img/network/rightArrow.png",
+        "img/network/upArrow.png",
+        "img/network/zoomExtends.png"
+      ]
     }
   ]
 }

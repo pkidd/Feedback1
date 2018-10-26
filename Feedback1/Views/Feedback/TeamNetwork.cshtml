@@ -1,7 +1,800 @@
 ﻿
 @{
-    ViewData["Title"] = "TeamNetwork";
+  ViewData["Title"] = "TeamNetwork";
 }
 
-<h2>TeamNetwork</h2>
 
+<script type="text/javascript" src="~/vis/vis.js"></script>
+<link href="~/vis/vis-network.min.css" rel="stylesheet" />
+
+
+<style>
+  /*.row div {
+    border: 1px solid lightgrey;
+    background-color: #ff66cc;
+  }*/
+  .mh1 div {
+    height: 600px; /* 30% of viewport height*/
+  
+  }
+
+  .vis-tooltip {
+   
+  }
+
+
+/* http://jsbin.com/neladaqimi/13/edit?html,output */
+  /* http://visjs.org/network_examples.html   Examples */
+  
+ 
+</style>
+
+<h2>Team Network</h2>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">    
+
+    <h3 id="pgHeading">Team</h3>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">    
+    <div id="mynetwork" >
+
+      <div  class="vis-network">
+        <canvas tyle="width: 50%; height: 50vh"></canvas>
+      </div>
+    </div>
+  </div>
+    
+</div>
+
+
+
+
+<script type="text/javascript">
+
+  var option = 'Team Communications';
+  var nodes = null;
+  var edges = null;
+  var network = null;
+
+  chartSelection(option);
+
+  function chartSelection(option) {
+
+    //var canvas = document.getElementsByTagName('canvas')[0];
+    //canvas.width  =600;
+    //canvas.height = 1000;
+    
+
+    switch (option) {
+
+    case 'Team Communications':
+        nodes = nodeTeamComms();
+        edges = edgeTeamComms();
+      break;
+
+    case 'Active Judo':
+      nodes = nodeActiveJudo5150();
+      edges = edgeActiveJudo5150();
+      break;
+    case 'Salveson Football Club':
+      nodes = nodeSalvenson3718();
+      edges = edgeSalvenson3718();
+
+      break;
+
+
+    }
+
+    var title = document.getElementById('pgHeading');
+    title.textContent = option; 
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+    var data = {
+      nodes: nodes,
+      edges: edges
+    };
+    var options = { height: "600px", width: "100%", interaction: { hover: true }};
+
+ 
+
+    network = new vis.Network(container, data, options);
+
+  
+     
+   
+
+    network.on("selectNode", function (params) {
+      if (params.nodes.length === 1) {
+        var node = nodes.get(params.nodes[0]);
+        window.open(node.url, '_blank');
+      }
+    });
+
+  }
+
+
+  function nodeTeamComms() {
+
+    var nodes = new vis.DataSet([
+      {id:1,label:'Your Team',shape:'circle',color:'#ADFFEA',title:'Communications',url:' '},
+      {id:2,label:'Strategy Planning',shape:'circle',color:'#97C2FC',title:'Strategy Planning',url:' '},
+      {id:3,label:'IT Software Development',shape:'circle',color:'#97C2FC',title:'IT Software Development',url:' '},
+      {id:4,label:'IT Infrastructure',shape:'circle',color:'#97C2FC',title:'IT Infrastructure',url:' '},
+      {id:5,label:'Finance',shape:'circle',color:'#97C2FC',title:'Finance',url:' '},
+      {id:6,label:'Human Resources',shape:'circle',color:'#97C2FC',title:'Human Resources',url:' '},
+
+    ]);
+
+    return nodes;
+  }
+  function edgeTeamComms() {
+    // create an array with edges
+    var edges = new vis.DataSet([
+      {from: 1, to: 2, value: 4, title: "You supported this team 4 times", arrows: "to"},
+      {from: 1, to: 3, value: 2, title: "You supported this team 2 times", arrows: "to"},
+      {from: 1, to: 4, value: 10, title: "You supported this team 10 times", arrows: "to"},
+      {from: 1, to: 5, value: 1, title: "You supported this team 1 times", arrows: "to"},
+      {from: 2, to: 1, value: 2, title: "You were supported by this team 2 times", arrows: "to"},
+      {from: 3, to: 1, value: 6, title: "You were supported by this team 6 times", arrows: "to"},
+      {from: 4, to: 1, value: 13, title: "You were supported by this team 13 times", arrows: "to"},
+      {from: 5, to: 1, value: 2, title: "You were supported by this team 2 times", arrows: "to"},
+
+
+
+
+
+
+
+
+      
+    ]);
+    return edges;
+  }
+
+
+  function nodeActiveJudo5150() {
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+      {id:1,label:'Club',shape:'circle',color:'#97C2FC',title:'Active Judo',url:'http://ssc-appsvr01:90/Club/Summary/5150'},
+      {id:2,label:'Hub',shape:'star',color:'#FFFF00',title:'Forresters / St Augustines High School',url:'http://ssc-appsvr01:90/Hub/Summary/18'},
+      {id:3,label:'Hub',shape:'star',color:'#FFFF00',title:'James Gillespie’s High School CSH',url:'http://ssc-appsvr01:90/Hub/Summary/331'},
+      {id:4,label:'School',shape:'diamond',color:'#FB7E81',title:'Broomhouse Primary School',url:'http://ssc-appsvr01:90/School/Summary/245'},
+      {id:5,label:'School',shape:'diamond',color:'#FB7E81',title:'Cadder Primary School',url:'http://ssc-appsvr01:90/School/Summary/280'},
+      {id:6,label:'School',shape:'diamond',color:'#FB7E81',title:'Carmunnock Primary School',url:'http://ssc-appsvr01:90/School/Summary/330'},
+      {id:7,label:'School',shape:'diamond',color:'#FB7E81',title:'Castlemilk High School',url:'http://ssc-appsvr01:90/School/Summary/2171'},
+      {id:8,label:'School',shape:'diamond',color:'#FB7E81',title:'Castleton Primary School',url:'http://ssc-appsvr01:90/School/Summary/358'},
+      {id:9,label:'School',shape:'diamond',color:'#FB7E81',title:'Hillhead Primary School',url:'http://ssc-appsvr01:90/School/Summary/844'},
+      {id:10,label:'School',shape:'diamond',color:'#FB7E81',title:'Hyndland Primary School',url:'http://ssc-appsvr01:90/School/Summary/877'},
+      {id:11,label:'School',shape:'diamond',color:'#FB7E81',title:'James Gillespies High School',url:'http://ssc-appsvr01:90/School/Summary/2270'},
+      {id:12,label:'School',shape:'diamond',color:'#FB7E81',title:'James Gillespies Primary School',url:'http://ssc-appsvr01:90/School/Summary/907'},
+      {id:13,label:'School',shape:'diamond',color:'#FB7E81',title:'Kelvindale Primary School',url:'http://ssc-appsvr01:90/School/Summary/929'},
+      {id:14,label:'School',shape:'diamond',color:'#FB7E81',title:'Miller Primary School',url:'http://ssc-appsvr01:90/School/Summary/1209'},
+      {id:15,label:'School',shape:'diamond',color:'#FB7E81',title:'Notre Dame Primary School',url:'http://ssc-appsvr01:90/School/Summary/1329'},
+      {id:16,label:'School',shape:'diamond',color:'#FB7E81',title:'Preston Street Primary School',url:'http://ssc-appsvr01:90/School/Summary/1433'},
+      {id:17,label:'School',shape:'diamond',color:'#FB7E81',title:'Royal Mile Primary School',url:'http://ssc-appsvr01:90/School/Summary/1491'},
+      {id:18,label:'School',shape:'diamond',color:'#FB7E81',title:'Sciennes Primary School',url:'http://ssc-appsvr01:90/School/Summary/1522'},
+      {id:19,label:'School',shape:'diamond',color:'#FB7E81',title:'St Bartholomews RC Primary School',url:'http://ssc-appsvr01:90/School/Summary/1615'},
+      {id:20,label:'School',shape:'diamond',color:'#FB7E81',title:'St Brides RC Primary School',url:'http://ssc-appsvr01:90/School/Summary/1628'},
+      {id:21,label:'School',shape:'diamond',color:'#FB7E81',title:'St Bridgids RC Primary School',url:'http://ssc-appsvr01:90/School/Summary/1633'},
+      {id:22,label:'School',shape:'diamond',color:'#FB7E81',title:'St Fillans RC Primary School',url:'http://ssc-appsvr01:90/School/Summary/1672'},
+      {id:23,label:'School',shape:'diamond',color:'#FB7E81',title:'St Mirins RC Primary School',url:'http://ssc-appsvr01:90/School/Summary/1792'},
+      {id:24,label:'School',shape:'diamond',color:'#FB7E81',title:'St Patricks RC Primary School',url:'http://ssc-appsvr01:90/School/Summary/1820'},
+      {id:25,label:'School',shape:'diamond',color:'#FB7E81',title:'St Peters RC Primary School',url:'http://ssc-appsvr01:90/School/Summary/1840'},
+      {id:26,label:'School',shape:'diamond',color:'#FB7E81',title:'Thornwood Primary School',url:'http://ssc-appsvr01:90/School/Summary/1955'},
+      {id:27,label:'School',shape:'diamond',color:'#FB7E81',title:'Tollcross Primary School',url:'http://ssc-appsvr01:90/School/Summary/1968'},
+      {id:28,label:'Club',shape:'circle',color:'#97C2FF',title:'All Stars Cheerleading Club',url:'http://ssc-appsvr01:90/Club/Summary/367'},
+      {id:29,label:'Club',shape:'circle',color:'#97C2FF',title:'Boroughmuir Blaze Basketball Club',url:'http://ssc-appsvr01:90/Club/Summary/753'},
+      {id:30,label:'Club',shape:'circle',color:'#97C2FF',title:'Carlton Cricket Club',url:'http://ssc-appsvr01:90/Club/Summary/936'},
+      {id:31,label:'Club',shape:'circle',color:'#97C2FF',title:'City of Edinburgh Gymnastics Club',url:'http://ssc-appsvr01:90/Club/Summary/1049'},
+      {id:32,label:'Club',shape:'circle',color:'#97C2FF',title:'Corstorphine Amateur Athletics Club',url:'http://ssc-appsvr01:90/Club/Summary/1121'},
+      {id:33,label:'Club',shape:'circle',color:'#97C2FF',title:'Disability Athletics Club',url:'http://ssc-appsvr01:90/Club/Summary/6830'},
+      {id:34,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh #3 Triathlon Club',url:'http://ssc-appsvr01:90/Club/Summary/6139'},
+      {id:35,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh City Football Club',url:'http://ssc-appsvr01:90/Club/Summary/1631'},
+      {id:36,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh International Table Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/7840'},
+      {id:37,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Warrender Baths Club',url:'http://ssc-appsvr01:90/Club/Summary/1668'},
+      {id:38,label:'Club',shape:'circle',color:'#7BE141',title:'Forrester Rugby Football Club',url:'http://ssc-appsvr01:90/Club/Summary/1859'},
+      {id:39,label:'Club',shape:'circle',color:'#7BE141',title:'Forth Canoe Club',url:'http://ssc-appsvr01:90/Club/Summary/1867'},
+      {id:40,label:'Club',shape:'circle',color:'#7BE141',title:'Heart Of Midlothian Swimming Club',url:'http://ssc-appsvr01:90/Club/Summary/2247'},
+      {id:41,label:'Club',shape:'circle',color:'#97C2FF',title:'Hibs Ladies Football Club',url:'http://ssc-appsvr01:90/Club/Summary/7001'},
+      {id:42,label:'Club',shape:'circle',color:'#7BE141',title:'Hutchison Vale Girls Football Club',url:'http://ssc-appsvr01:90/Club/Summary/6279'},
+      {id:43,label:'Club',shape:'circle',color:'#97C2FF',title:'Jets Volleyball Club',url:'http://ssc-appsvr01:90/Club/Summary/2484'},
+      {id:44,label:'Club',shape:'circle',color:'#7BE141',title:'Kestrel Gymnastics Club',url:'http://ssc-appsvr01:90/Club/Summary/2578'},
+      {id:45,label:'Club',shape:'circle',color:'#7BE141',title:'Nuvoc Volleyball Club',url:'http://ssc-appsvr01:90/Club/Summary/3338'},
+      {id:46,label:'Club',shape:'circle',color:'#97C2FF',title:'Pleasance Basketball',url:'http://ssc-appsvr01:90/Club/Summary/3519'},
+      {id:47,label:'Club',shape:'circle',color:'#7BE141',title:'Salveson Football Club',url:'http://ssc-appsvr01:90/Club/Summary/3718'},
+      {id:48,label:'Club',shape:'circle',color:'#97C2FF',title:'Tall Oaks Youth Badminton Club',url:'http://ssc-appsvr01:90/Club/Summary/4119'},
+      {id:49,label:'Club',shape:'circle',color:'#7BE141',title:'Warrender Swimming Club',url:'http://ssc-appsvr01:90/Club/Summary/7358'},
+      {id:50,label:'Club',shape:'circle',color:'#7BE141',title:'Warrender Water Polo Club',url:'http://ssc-appsvr01:90/Club/Summary/223'},
+      {id:51,label:'Club',shape:'circle',color:'#7BE141',title:'West Edinburgh Netball Club',url:'http://ssc-appsvr01:90/Club/Summary/5685'},
+      {id:52,label:'Club',shape:'circle',color:'#97C2FF',title:'A&M Training Community Damce',url:'http://ssc-appsvr01:90/Club/Summary/6075'},
+      {id:53,label:'Club',shape:'circle',color:'#97C2FF',title:'Access Parkour',url:'http://ssc-appsvr01:90/Club/Summary/7544'},
+
+
+
+
+
+
+
+
+      {id:62,label:'Club',shape:'circle',color:'#97C2FF',title:'Braveheart Fencing',url:'http://ssc-appsvr01:90/Club/Summary/7804'},
+      {id:63,label:'Club',shape:'circle',color:'#97C2FF',title:'Brian Long Pro Judo Events',url:'http://ssc-appsvr01:90/Club/Summary/792'},
+      {id:64,label:'Club',shape:'circle',color:'#97C2FF',title:'Bridge 8',url:'http://ssc-appsvr01:90/Club/Summary/6056'},
+      {id:65,label:'Club',shape:'circle',color:'#97C2FF',title:'Broomhill Sports Club',url:'http://ssc-appsvr01:90/Club/Summary/814'},
+      {id:66,label:'Club',shape:'circle',color:'#97C2FF',title:'Broomhill Sports Club',url:'http://ssc-appsvr01:90/Club/Summary/814'},
+      {id:67,label:'Club',shape:'circle',color:'#97C2FF',title:'Cala Hockey Club',url:'http://ssc-appsvr01:90/Club/Summary/897'},
+      {id:68,label:'Club',shape:'circle',color:'#97C2FF',title:'Camanachd Dhùn-Èideann',url:'http://ssc-appsvr01:90/Club/Summary/5149'},
+      {id:69,label:'Club',shape:'circle',color:'#97C2FF',title:'Camanachd Dhùn-Èideann',url:'http://ssc-appsvr01:90/Club/Summary/5149'},
+      {id:70,label:'Club',shape:'circle',color:'#97C2FF',title:'Camanachd Dhùn-Èideann',url:'http://ssc-appsvr01:90/Club/Summary/5149'},
+      {id:71,label:'Club',shape:'circle',color:'#97C2FF',title:'Camanachd Dhùn-Èideann',url:'http://ssc-appsvr01:90/Club/Summary/5149'},
+      {id:72,label:'Club',shape:'circle',color:'#97C2FF',title:'Camanachd Dhùn-Èideann',url:'http://ssc-appsvr01:90/Club/Summary/5149'},
+      {id:73,label:'Club',shape:'circle',color:'#97C2FF',title:'Camanachd Dhùn-Èideann',url:'http://ssc-appsvr01:90/Club/Summary/5149'},
+
+
+
+
+      {id:78,label:'Club',shape:'circle',color:'#97C2FF',title:'Cartha Queens Park Rugby Club',url:'http://ssc-appsvr01:90/Club/Summary/974'},
+      {id:79,label:'Club',shape:'circle',color:'#97C2FF',title:'Cartha Queens Park Rugby Club',url:'http://ssc-appsvr01:90/Club/Summary/974'},
+
+
+
+
+
+
+      {id:86,label:'Club',shape:'circle',color:'#97C2FF',title:'City of Glasgow Badminton Club',url:'http://ssc-appsvr01:90/Club/Summary/8901'},
+      {id:87,label:'Club',shape:'circle',color:'#97C2FF',title:'Clydesdale Cricket Club',url:'http://ssc-appsvr01:90/Club/Summary/1084'},
+      {id:88,label:'Club',shape:'circle',color:'#97C2FF',title:'Dalry Karate Group',url:'http://ssc-appsvr01:90/Club/Summary/1254'},
+      {id:89,label:'Club',shape:'circle',color:'#97C2FF',title:'Dance Division',url:'http://ssc-appsvr01:90/Club/Summary/1266'},
+      {id:90,label:'Club',shape:'circle',color:'#97C2FF',title:'Dance Division',url:'http://ssc-appsvr01:90/Club/Summary/1266'},
+      {id:91,label:'Club',shape:'circle',color:'#97C2FF',title:'Dance Division',url:'http://ssc-appsvr01:90/Club/Summary/1266'},
+      {id:92,label:'Club',shape:'circle',color:'#97C2FF',title:'Dance Division',url:'http://ssc-appsvr01:90/Club/Summary/1266'},
+      {id:93,label:'Club',shape:'circle',color:'#97C2FF',title:'Dunedin Connellys',url:'http://ssc-appsvr01:90/Club/Summary/1490'},
+
+      {id:95,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Dance Academy',url:'http://ssc-appsvr01:90/Club/Summary/5161'},
+
+      {id:97,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Jets Volleyball CLub',url:'http://ssc-appsvr01:90/Club/Summary/8207'},
+      {id:98,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Leisure (Tennis)',url:'http://ssc-appsvr01:90/Club/Summary/5165'},
+      {id:99,label:'Club',shape:'circle',color:'#97C2FF',title:'Elite Soccer',url:'http://ssc-appsvr01:90/Club/Summary/4756'},
+      {id:100,label:'Club',shape:'circle',color:'#97C2FF',title:'Elite Soccer',url:'http://ssc-appsvr01:90/Club/Summary/4756'},
+      {id:101,label:'Club',shape:'circle',color:'#97C2FF',title:'Elite Soccer',url:'http://ssc-appsvr01:90/Club/Summary/4756'},
+      {id:102,label:'Club',shape:'circle',color:'#97C2FF',title:'Elite Soccer',url:'http://ssc-appsvr01:90/Club/Summary/4756'},
+      {id:103,label:'Club',shape:'circle',color:'#97C2FF',title:'Enjoy a Ball',url:'http://ssc-appsvr01:90/Club/Summary/1718'},
+      {id:104,label:'Club',shape:'circle',color:'#97C2FF',title:'Fencing Fun',url:'http://ssc-appsvr01:90/Club/Summary/1783'},
+      {id:105,label:'Club',shape:'circle',color:'#97C2FF',title:'Fencing Fun',url:'http://ssc-appsvr01:90/Club/Summary/1783'},
+      {id:106,label:'Club',shape:'circle',color:'#97C2FF',title:'Fencing Fun',url:'http://ssc-appsvr01:90/Club/Summary/1783'},
+      {id:107,label:'Club',shape:'circle',color:'#97C2FF',title:'Fencing Fun',url:'http://ssc-appsvr01:90/Club/Summary/1783'},
+      {id:108,label:'Club',shape:'circle',color:'#97C2FF',title:'Fencing Fun',url:'http://ssc-appsvr01:90/Club/Summary/1783'},
+      {id:109,label:'Club',shape:'circle',color:'#97C2FF',title:'Fencing Is Fun',url:'http://ssc-appsvr01:90/Club/Summary/4541'},
+      {id:110,label:'Club',shape:'circle',color:'#97C2FF',title:'Forrester RFC',url:'http://ssc-appsvr01:90/Club/Summary/6948'},
+
+
+      {id:113,label:'Club',shape:'circle',color:'#97C2FF',title:'Garscube Harriers',url:'http://ssc-appsvr01:90/Club/Summary/1937'},
+      {id:114,label:'Club',shape:'circle',color:'#97C2FF',title:'Giffnock North Amateur Athletics Club',url:'http://ssc-appsvr01:90/Club/Summary/1952'},
+      {id:115,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Clyde College',url:'http://ssc-appsvr01:90/Club/Summary/8228'},
+      {id:116,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Fever Basketball Club',url:'http://ssc-appsvr01:90/Club/Summary/1980'},
+      {id:117,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Fever Basketball Club',url:'http://ssc-appsvr01:90/Club/Summary/1980'},
+      {id:118,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Fever Basketball Club',url:'http://ssc-appsvr01:90/Club/Summary/1980'},
+      {id:119,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Fever Basketball Club',url:'http://ssc-appsvr01:90/Club/Summary/6463'},
+      {id:120,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Fever Basketball Club',url:'http://ssc-appsvr01:90/Club/Summary/1980'},
+      {id:121,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Fever Basketball Club',url:'http://ssc-appsvr01:90/Club/Summary/1980'},
+      {id:122,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Fever Basketball Club',url:'http://ssc-appsvr01:90/Club/Summary/6463'},
+      {id:123,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Gymnastics Club',url:'http://ssc-appsvr01:90/Club/Summary/1985'},
+      {id:124,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Hawks Rugby Football Club',url:'http://ssc-appsvr01:90/Club/Summary/1988'},
+      {id:125,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Life',url:'http://ssc-appsvr01:90/Club/Summary/5621'},
+      {id:126,label:'Club',shape:'circle',color:'#97C2FF',title:'Glasgow Rocks',url:'http://ssc-appsvr01:90/Club/Summary/4454'},
+      {id:127,label:'Club',shape:'circle',color:'#97C2FF',title:'Heart of Midlothian Football Club',url:'http://ssc-appsvr01:90/Club/Summary/2246'},
+
+      {id:129,label:'Club',shape:'circle',color:'#97C2FF',title:'Hillhead Jordanhill Rugby Football Club',url:'http://ssc-appsvr01:90/Club/Summary/2304'},
+      {id:130,label:'Club',shape:'circle',color:'#97C2FF',title:'Hillhead Jordanhill Rugby Football Club',url:'http://ssc-appsvr01:90/Club/Summary/2304'},
+      {id:131,label:'Club',shape:'circle',color:'#97C2FF',title:'Hillhead Jordanhill Rugby Football Club',url:'http://ssc-appsvr01:90/Club/Summary/2304'},
+      {id:132,label:'Club',shape:'circle',color:'#97C2FF',title:'Hillhead Jordanhill Rugby Football Club',url:'http://ssc-appsvr01:90/Club/Summary/2304'},
+      {id:133,label:'Club',shape:'circle',color:'#97C2FF',title:'Hillhead Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/2305'},
+
+      {id:135,label:'Club',shape:'circle',color:'#97C2FF',title:'Infusion Dance',url:'http://ssc-appsvr01:90/Club/Summary/2338'},
+      {id:136,label:'Club',shape:'circle',color:'#97C2FF',title:'Jax Dance',url:'http://ssc-appsvr01:90/Club/Summary/6609'},
+      {id:137,label:'Club',shape:'circle',color:'#97C2FF',title:'Jax Dance',url:'http://ssc-appsvr01:90/Club/Summary/6609'},
+      {id:138,label:'Club',shape:'circle',color:'#97C2FF',title:'Joga Futsal',url:'http://ssc-appsvr01:90/Club/Summary/8977'},
+      {id:139,label:'Club',shape:'circle',color:'#97C2FF',title:'Joga Futsal',url:'http://ssc-appsvr01:90/Club/Summary/8977'},
+      {id:140,label:'Club',shape:'circle',color:'#97C2FF',title:'Kelvindale Bowling Club',url:'http://ssc-appsvr01:90/Club/Summary/2568'},
+
+      {id:142,label:'Club',shape:'circle',color:'#97C2FF',title:'Lambhill Stables',url:'http://ssc-appsvr01:90/Club/Summary/2759'},
+      {id:143,label:'Club',shape:'circle',color:'#97C2FF',title:'Live it Dance studios',url:'http://ssc-appsvr01:90/Club/Summary/6114'},
+      {id:144,label:'Club',shape:'circle',color:'#97C2FF',title:'Live it Dance studios',url:'http://ssc-appsvr01:90/Club/Summary/6114'},
+      {id:145,label:'Club',shape:'circle',color:'#97C2FF',title:'Maryhill Bowling Club',url:'http://ssc-appsvr01:90/Club/Summary/6034'},
+      {id:146,label:'Club',shape:'circle',color:'#97C2FF',title:'Meadows Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/3063'},
+      {id:147,label:'Club',shape:'circle',color:'#97C2FF',title:'Meadows Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/3063'},
+      {id:148,label:'Club',shape:'circle',color:'#97C2FF',title:'Meadows Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/3063'},
+      {id:149,label:'Club',shape:'circle',color:'#97C2FF',title:'Meadows Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/3063'},
+      {id:150,label:'Club',shape:'circle',color:'#97C2FF',title:'Meadows Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/3063'},
+      {id:151,label:'Club',shape:'circle',color:'#97C2FF',title:'Meadows Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/3063'},
+      {id:152,label:'Club',shape:'circle',color:'#97C2FF',title:'Merchiston Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/7599'},
+      {id:153,label:'Club',shape:'circle',color:'#97C2FF',title:'Movement Park',url:'http://ssc-appsvr01:90/Club/Summary/8582'},
+      {id:154,label:'Club',shape:'circle',color:'#97C2FF',title:'Movement Park',url:'http://ssc-appsvr01:90/Club/Summary/8582'},
+      {id:155,label:'Club',shape:'circle',color:'#97C2FF',title:'Movement Park',url:'http://ssc-appsvr01:90/Club/Summary/8582'},
+      {id:156,label:'Club',shape:'circle',color:'#97C2FF',title:'Movement Park',url:'http://ssc-appsvr01:90/Club/Summary/8582'},
+      {id:157,label:'Club',shape:'circle',color:'#97C2FF',title:'North Kelvin Sports Development Group',url:'http://ssc-appsvr01:90/Club/Summary/4519'},
+      {id:158,label:'Club',shape:'circle',color:'#97C2FF',title:'North Kelvin Sports Development Group',url:'http://ssc-appsvr01:90/Club/Summary/4519'},
+      {id:159,label:'Club',shape:'circle',color:'#97C2FF',title:'North Kelvin Sports Development Group',url:'http://ssc-appsvr01:90/Club/Summary/4519'},
+
+
+
+      {id:163,label:'Club',shape:'circle',color:'#97C2FF',title:'Partick Thistle FC',url:'http://ssc-appsvr01:90/Club/Summary/4711'},
+      {id:164,label:'Club',shape:'circle',color:'#97C2FF',title:'Partick Thistle FC',url:'http://ssc-appsvr01:90/Club/Summary/4711'},
+      {id:165,label:'Club',shape:'circle',color:'#97C2FF',title:'Peter Harkess Taekwondo',url:'http://ssc-appsvr01:90/Club/Summary/3483'},
+      {id:166,label:'Club',shape:'circle',color:'#97C2FF',title:'Phoenix Judo Club',url:'http://ssc-appsvr01:90/Club/Summary/30'},
+      {id:167,label:'Club',shape:'circle',color:'#97C2FF',title:'Phoenix Taekwondo (Hyndland)',url:'http://ssc-appsvr01:90/Club/Summary/6595'},
+      {id:168,label:'Club',shape:'circle',color:'#97C2FF',title:'Phoenix Taekwondo (Hyndland)',url:'http://ssc-appsvr01:90/Club/Summary/6595'},
+      {id:169,label:'Club',shape:'circle',color:'#97C2FF',title:'Phoenix Taekwondo (Hyndland)',url:'http://ssc-appsvr01:90/Club/Summary/6595'},
+      {id:170,label:'Club',shape:'circle',color:'#97C2FF',title:'Phoenix Taekwondo (Knightswood)',url:'http://ssc-appsvr01:90/Club/Summary/8447'},
+      {id:171,label:'Club',shape:'circle',color:'#97C2FF',title:'Pinkston Panthers',url:'http://ssc-appsvr01:90/Club/Summary/8976'},
+      {id:172,label:'Club',shape:'circle',color:'#97C2FF',title:'Pinkston Panthers',url:'http://ssc-appsvr01:90/Club/Summary/8976'},
+      {id:173,label:'Club',shape:'circle',color:'#97C2FF',title:'Rangers Football Club',url:'http://ssc-appsvr01:90/Club/Summary/3585'},
+
+      {id:175,label:'Club',shape:'circle',color:'#97C2FF',title:'Sapphire Gymnastics Academy',url:'http://ssc-appsvr01:90/Club/Summary/7945'},
+      {id:176,label:'Club',shape:'circle',color:'#97C2FF',title:'Sapphire Gymnastics Academy',url:'http://ssc-appsvr01:90/Club/Summary/7945'},
+      {id:177,label:'Club',shape:'circle',color:'#97C2FF',title:'Sapphire Gymnastics Club',url:'http://ssc-appsvr01:90/Club/Summary/3728'},
+      {id:178,label:'Club',shape:'circle',color:'#97C2FF',title:'Sapphire Gymnastics Club',url:'http://ssc-appsvr01:90/Club/Summary/3728'},
+      {id:179,label:'Club',shape:'circle',color:'#97C2FF',title:'Sapphire Gymnastics Club',url:'http://ssc-appsvr01:90/Club/Summary/3728'},
+      {id:180,label:'Club',shape:'circle',color:'#97C2FF',title:'Sapphire Gymnastics Club',url:'http://ssc-appsvr01:90/Club/Summary/3728'},
+      {id:181,label:'Club',shape:'circle',color:'#97C2FF',title:'Satori Karate Club',url:'http://ssc-appsvr01:90/Club/Summary/3730'},
+      {id:182,label:'Club',shape:'circle',color:'#97C2FF',title:'Scotstoun Squash Club',url:'http://ssc-appsvr01:90/Club/Summary/6490'},
+      {id:183,label:'Club',shape:'circle',color:'#97C2FF',title:'Scottish Rocks',url:'http://ssc-appsvr01:90/Club/Summary/3769'},
+      {id:184,label:'Club',shape:'circle',color:'#97C2FF',title:'Scottish Rocks',url:'http://ssc-appsvr01:90/Club/Summary/3769'},
+      {id:185,label:'Club',shape:'circle',color:'#97C2FF',title:'Scottish Sports Futures',url:'http://ssc-appsvr01:90/Club/Summary/4455'},
+      {id:186,label:'Club',shape:'circle',color:'#97C2FF',title:'Scottish Sports Futures',url:'http://ssc-appsvr01:90/Club/Summary/4455'},
+      {id:187,label:'Club',shape:'circle',color:'#97C2FF',title:'Scottish Sports Futures',url:'http://ssc-appsvr01:90/Club/Summary/4455'},
+      {id:188,label:'Club',shape:'circle',color:'#97C2FF',title:'Scottish Squash Rackets Club',url:'http://ssc-appsvr01:90/Club/Summary/3036'},
+      {id:189,label:'Club',shape:'circle',color:'#97C2FF',title:'Shukokai Karate Club',url:'http://ssc-appsvr01:90/Club/Summary/3823'},
+      {id:190,label:'Club',shape:'circle',color:'#97C2FF',title:'Southside Smashers Badminton Club',url:'http://ssc-appsvr01:90/Club/Summary/8314'},
+      {id:191,label:'Club',shape:'circle',color:'#97C2FF',title:'Step it Up Dance',url:'http://ssc-appsvr01:90/Club/Summary/5115'},
+      {id:192,label:'Club',shape:'circle',color:'#97C2FF',title:'Step it Up Dance',url:'http://ssc-appsvr01:90/Club/Summary/5115'},
+      {id:193,label:'Club',shape:'circle',color:'#97C2FF',title:'Step it Up Dance',url:'http://ssc-appsvr01:90/Club/Summary/5115'},
+      {id:194,label:'Club',shape:'circle',color:'#97C2FF',title:'Swimeasy',url:'http://ssc-appsvr01:90/Club/Summary/4102'},
+      {id:195,label:'Club',shape:'circle',color:'#97C2FF',title:'Tir Connail Harps Gaelic Football',url:'http://ssc-appsvr01:90/Club/Summary/4202'},
+      {id:196,label:'Club',shape:'circle',color:'#97C2FF',title:'Ultimate Soccer',url:'http://ssc-appsvr01:90/Club/Summary/5747'},
+      {id:197,label:'Club',shape:'circle',color:'#97C2FF',title:'Utd Sports',url:'http://ssc-appsvr01:90/Club/Summary/6135'},
+      {id:198,label:'Club',shape:'circle',color:'#97C2FF',title:'Utd Sports',url:'http://ssc-appsvr01:90/Club/Summary/6135'},
+      {id:199,label:'Club',shape:'circle',color:'#97C2FF',title:'Utd Sports',url:'http://ssc-appsvr01:90/Club/Summary/6135'},
+      {id:200,label:'Club',shape:'circle',color:'#97C2FF',title:'Utd Sports',url:'http://ssc-appsvr01:90/Club/Summary/6135'},
+      {id:201,label:'Club',shape:'circle',color:'#97C2FF',title:'Utd Sports',url:'http://ssc-appsvr01:90/Club/Summary/6135'},
+      {id:202,label:'Club',shape:'circle',color:'#97C2FF',title:'Utd Sports',url:'http://ssc-appsvr01:90/Club/Summary/6135'},
+      {id:203,label:'Club',shape:'circle',color:'#97C2FF',title:'Victoria Park City Of Glasgow Athletics Club',url:'http://ssc-appsvr01:90/Club/Summary/36'},
+      {id:204,label:'Club',shape:'circle',color:'#97C2FF',title:'Victoria Park City Of Glasgow Athletics Club',url:'http://ssc-appsvr01:90/Club/Summary/36'},
+      {id:205,label:'Club',shape:'circle',color:'#97C2FF',title:'Victoria Park City Of Glasgow Athletics Club',url:'http://ssc-appsvr01:90/Club/Summary/36'},
+      {id:206,label:'Club',shape:'circle',color:'#97C2FF',title:'Warrender Baths Club',url:'http://ssc-appsvr01:90/Club/Summary/61'},
+
+
+
+      {id:210,label:'Club',shape:'circle',color:'#97C2FF',title:'Weir Recreation Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/5920'},
+      {id:211,label:'Club',shape:'circle',color:'#97C2FF',title:'Weirs Cricket Club',url:'http://ssc-appsvr01:90/Club/Summary/65'},
+
+      {id:213,label:'Club',shape:'circle',color:'#97C2FF',title:'Western Lawn Tennis and Squash Club',url:'http://ssc-appsvr01:90/Club/Summary/5390'},
+      {id:214,label:'Club',shape:'circle',color:'#97C2FF',title:'Western Lawn Tennis and Squash Club',url:'http://ssc-appsvr01:90/Club/Summary/5390'},
+      {id:215,label:'Club',shape:'circle',color:'#97C2FF',title:'Western Lawn Tennis and Squash Club',url:'http://ssc-appsvr01:90/Club/Summary/5390'},
+      {id:216,label:'Club',shape:'circle',color:'#97C2FF',title:'Western Lawn Tennis and Squash Club',url:'http://ssc-appsvr01:90/Club/Summary/5390'},
+      {id:217,label:'Club',shape:'circle',color:'#97C2FF',title:'Western Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/215'},
+      {id:218,label:'Club',shape:'circle',color:'#97C2FF',title:'Western Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/215'},
+
+
+    ]);
+
+    return nodes;
+  };
+
+
+
+  function edgeActiveJudo5150() {
+    // create an array with edges
+    var edges = new vis.DataSet([
+      { from: 2, to: 1 },
+      { from: 3, to: 1 },
+      { from: 4, to: 1 },
+      { from: 5, to: 1 },
+      { from: 6, to: 1 },
+      { from: 7, to: 1 },
+      { from: 8, to: 1 },
+      { from: 9, to: 1 },
+      { from: 10, to: 1 },
+      { from: 11, to: 1 },
+      { from: 12, to: 1 },
+      { from: 13, to: 1 },
+      { from: 14, to: 1 },
+      { from: 15, to: 1 },
+      { from: 16, to: 1 },
+      { from: 17, to: 1 },
+      { from: 18, to: 1 },
+      { from: 19, to: 1 },
+      { from: 20, to: 1 },
+      { from: 21, to: 1 },
+      { from: 22, to: 1 },
+      { from: 23, to: 1 },
+      { from: 24, to: 1 },
+      { from: 25, to: 1 },
+      { from: 26, to: 1 },
+      { from: 27, to: 1 },
+      { from: 2, to: 28 },
+      { from: 3, to: 29 },
+      { from: 3, to: 30 },
+      { from: 3, to: 31 },
+      { from: 2, to: 32 },
+      { from: 2, to: 33 },
+      { from: 2, to: 34 },
+      { from: 2, to: 35 },
+      { from: 3, to: 36 },
+      { from: 3, to: 37 },
+      { from: 2, to: 38 },
+      { from: 2, to: 39 },
+      { from: 2, to: 40 },
+      { from: 2, to: 41 },
+      { from: 2, to: 42 },
+      { from: 2, to: 43 },
+      { from: 2, to: 44 },
+      { from: 3, to: 45 },
+      { from: 2, to: 46 },
+      { from: 2, to: 47 },
+      { from: 2, to: 48 },
+      { from: 2, to: 49 },
+      { from: 3, to: 50 },
+      { from: 2, to: 51 },
+      { from: 24, to: 52 },
+      { from: 18, to: 53 },
+      { from: 4, to: 28 },
+      { from: 12, to: 29 },
+      { from: 16, to: 29 },
+      { from: 17, to: 29 },
+      { from: 18, to: 29 },
+      { from: 25, to: 29 },
+      { from: 27, to: 29 },
+      { from: 11, to: 29 },
+      { from: 13, to: 62 },
+      { from: 22, to: 63 },
+      { from: 4, to: 64 },
+      { from: 10, to: 65 },
+      { from: 26, to: 66 },
+      { from: 25, to: 67 },
+      { from: 12, to: 68 },
+      { from: 16, to: 69 },
+      { from: 17, to: 70 },
+      { from: 18, to: 71 },
+      { from: 27, to: 72 },
+      { from: 11, to: 73 },
+      { from: 12, to: 30 },
+      { from: 18, to: 30 },
+      { from: 27, to: 30 },
+      { from: 11, to: 30 },
+      { from: 20, to: 78 },
+      { from: 21, to: 79 },
+      { from: 12, to: 31 },
+      { from: 16, to: 31 },
+      { from: 17, to: 31 },
+      { from: 18, to: 31 },
+      { from: 27, to: 31 },
+      { from: 11, to: 31 },
+      { from: 15, to: 86 },
+      { from: 20, to: 87 },
+      { from: 4, to: 88 },
+      { from: 12, to: 89 },
+      { from: 16, to: 90 },
+      { from: 17, to: 91 },
+      { from: 27, to: 92 },
+      { from: 4, to: 93 },
+      { from: 4, to: 35 },
+      { from: 4, to: 95 },
+      { from: 11, to: 36 },
+      { from: 4, to: 97 },
+      { from: 25, to: 98 },
+      { from: 17, to: 99 },
+      { from: 18, to: 100 },
+      { from: 25, to: 101 },
+      { from: 27, to: 102 },
+      { from: 10, to: 103 },
+      { from: 12, to: 104 },
+      { from: 17, to: 105 },
+      { from: 18, to: 106 },
+      { from: 27, to: 107 },
+      { from: 11, to: 108 },
+      { from: 25, to: 109 },
+      { from: 4, to: 110 },
+      { from: 4, to: 38 },
+      { from: 4, to: 39 },
+      { from: 5, to: 113 },
+      { from: 22, to: 114 },
+      { from: 19, to: 115 },
+      { from: 5, to: 116 },
+      { from: 9, to: 117 },
+      { from: 10, to: 118 },
+      { from: 10, to: 119 },
+      { from: 15, to: 120 },
+      { from: 26, to: 121 },
+      { from: 26, to: 122 },
+      { from: 7, to: 123 },
+      { from: 24, to: 124 },
+      { from: 19, to: 125 },
+      { from: 22, to: 126 },
+      { from: 4, to: 127 },
+      { from: 4, to: 40 },
+      { from: 10, to: 129 },
+      { from: 13, to: 130 },
+      { from: 15, to: 131 },
+      { from: 26, to: 132 },
+      { from: 13, to: 133 },
+      { from: 4, to: 42 },
+      { from: 26, to: 135 },
+      { from: 6, to: 136 },
+      { from: 8, to: 137 },
+      { from: 5, to: 138 },
+      { from: 13, to: 139 },
+      { from: 13, to: 140 },
+      { from: 4, to: 44 },
+      { from: 5, to: 142 },
+      { from: 12, to: 143 },
+      { from: 18, to: 144 },
+      { from: 5, to: 145 },
+      { from: 12, to: 146 },
+      { from: 16, to: 147 },
+      { from: 17, to: 148 },
+      { from: 18, to: 149 },
+      { from: 27, to: 150 },
+      { from: 11, to: 151 },
+      { from: 11, to: 152 },
+      { from: 10, to: 153 },
+      { from: 15, to: 154 },
+      { from: 24, to: 155 },
+      { from: 26, to: 156 },
+      { from: 5, to: 157 },
+      { from: 13, to: 158 },
+      { from: 26, to: 159 },
+      { from: 16, to: 45 },
+      { from: 27, to: 45 },
+      { from: 11, to: 45 },
+      { from: 5, to: 163 },
+      { from: 26, to: 164 },
+      { from: 4, to: 165 },
+      { from: 9, to: 166 },
+      { from: 10, to: 167 },
+      { from: 15, to: 168 },
+      { from: 26, to: 169 },
+      { from: 9, to: 170 },
+      { from: 5, to: 171 },
+      { from: 13, to: 172 },
+      { from: 5, to: 173 },
+      { from: 4, to: 47 },
+      { from: 5, to: 175 },
+      { from: 13, to: 176 },
+      { from: 5, to: 177 },
+      { from: 13, to: 178 },
+      { from: 15, to: 179 },
+      { from: 26, to: 180 },
+      { from: 20, to: 181 },
+      { from: 26, to: 182 },
+      { from: 8, to: 183 },
+      { from: 14, to: 184 },
+      { from: 5, to: 185 },
+      { from: 8, to: 186 },
+      { from: 14, to: 187 },
+      { from: 13, to: 188 },
+      { from: 22, to: 189 },
+      { from: 8, to: 190 },
+      { from: 17, to: 191 },
+      { from: 25, to: 192 },
+      { from: 27, to: 193 },
+      { from: 11, to: 194 },
+      { from: 22, to: 195 },
+      { from: 24, to: 196 },
+      { from: 19, to: 197 },
+      { from: 20, to: 198 },
+      { from: 21, to: 199 },
+      { from: 22, to: 200 },
+      { from: 23, to: 201 },
+      { from: 24, to: 202 },
+      { from: 10, to: 203 },
+      { from: 15, to: 204 },
+      { from: 26, to: 205 },
+      { from: 11, to: 206 },
+      { from: 11, to: 49 },
+      { from: 18, to: 50 },
+      { from: 11, to: 50 },
+      { from: 22, to: 210 },
+      { from: 8, to: 211 },
+      { from: 4, to: 51 },
+      { from: 5, to: 213 },
+      { from: 10, to: 214 },
+      { from: 15, to: 215 },
+      { from: 26, to: 216 },
+      { from: 5, to: 217 },
+      { from: 13, to: 218 },
+
+    ]);
+    return edges;
+  };
+
+
+  function nodeSalvenson3718() {
+
+    // create an array with nodes
+    var nodes = new vis.DataSet([
+      {id:1,label:'Club',shape:'circle',color:'#97C2FC',title:'Salveson Football Club',url:'http://ssc-appsvr01:90/Club/Summary/3718'},
+      {id:2,label:'Hub',shape:'star',color:'#FFFF00',title:'Forresters / St Augustines High School',url:'http://ssc-appsvr01:90/Hub/Summary/18'},
+      {id:3,label:'School',shape:'diamond',color:'#FB7E81',title:'Broomhouse Primary School',url:'http://ssc-appsvr01:90/School/Summary/245'},
+      {id:4,label:'School',shape:'diamond',color:'#FB7E81',title:'Carrick Knowe Primary School',url:'http://ssc-appsvr01:90/School/Summary/341'},
+      {id:5,label:'School',shape:'diamond',color:'#FB7E81',title:'Gylemuir Primary School',url:'http://ssc-appsvr01:90/School/Summary/801'},
+      {id:6,label:'School',shape:'diamond',color:'#FB7E81',title:'Murrayburn Primary School',url:'http://ssc-appsvr01:90/School/Summary/1265'},
+
+
+      {id:9,label:'Club',shape:'circle',color:'#97C2FF',title:'Corstorphine Amateur Athletics Club',url:'http://ssc-appsvr01:90/Club/Summary/1121'},
+      {id:10,label:'Club',shape:'circle',color:'#97C2FF',title:'Disability Athletics Club',url:'http://ssc-appsvr01:90/Club/Summary/6830'},
+      {id:11,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh #3 Triathlon Club',url:'http://ssc-appsvr01:90/Club/Summary/6139'},
+
+
+
+
+      {id:16,label:'Club',shape:'circle',color:'#97C2FF',title:'Hibs Ladies Football Club',url:'http://ssc-appsvr01:90/Club/Summary/7001'},
+
+      {id:18,label:'Club',shape:'circle',color:'#97C2FF',title:'Jets Volleyball Club',url:'http://ssc-appsvr01:90/Club/Summary/2484'},
+
+      {id:20,label:'Club',shape:'circle',color:'#97C2FF',title:'Pleasance Basketball',url:'http://ssc-appsvr01:90/Club/Summary/3519'},
+      {id:21,label:'Club',shape:'circle',color:'#97C2FF',title:'Tall Oaks Youth Badminton Club',url:'http://ssc-appsvr01:90/Club/Summary/4119'},
+      {id:22,label:'Club',shape:'circle',color:'#97C2FF',title:'Warrender Swimming Club',url:'http://ssc-appsvr01:90/Club/Summary/7358'},
+
+
+
+
+
+
+      {id:29,label:'Club',shape:'circle',color:'#97C2FF',title:'Bridge 8',url:'http://ssc-appsvr01:90/Club/Summary/6056'},
+      {id:30,label:'Club',shape:'circle',color:'#97C2FF',title:'Carrick Knowe Bowling Club',url:'http://ssc-appsvr01:90/Club/Summary/967'},
+      {id:31,label:'Club',shape:'circle',color:'#97C2FF',title:'Carrick Knowe Bowling Club',url:'http://ssc-appsvr01:90/Club/Summary/967'},
+      {id:32,label:'Club',shape:'circle',color:'#97C2FF',title:'Corstorphine Bowling Club',url:'http://ssc-appsvr01:90/Club/Summary/1122'},
+      {id:33,label:'Club',shape:'circle',color:'#97C2FF',title:'Corstorphine Bowling Club',url:'http://ssc-appsvr01:90/Club/Summary/1122'},
+      {id:34,label:'Club',shape:'circle',color:'#97C2FF',title:'Corstorphine Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/5803'},
+      {id:35,label:'Club',shape:'circle',color:'#97C2FF',title:'Corstorphine Tennis Club',url:'http://ssc-appsvr01:90/Club/Summary/5803'},
+      {id:36,label:'Club',shape:'circle',color:'#97C2FF',title:'Dalry Karate Group',url:'http://ssc-appsvr01:90/Club/Summary/1254'},
+      {id:37,label:'Club',shape:'circle',color:'#97C2FF',title:'Dalry Karate Group',url:'http://ssc-appsvr01:90/Club/Summary/1254'},
+      {id:38,label:'Club',shape:'circle',color:'#97C2FF',title:'Dalry Karate Group',url:'http://ssc-appsvr01:90/Club/Summary/1254'},
+      {id:39,label:'Club',shape:'circle',color:'#97C2FF',title:'Dalry Karate Group',url:'http://ssc-appsvr01:90/Club/Summary/1254'},
+      {id:40,label:'Club',shape:'circle',color:'#97C2FF',title:'Dunedin Connellys',url:'http://ssc-appsvr01:90/Club/Summary/1490'},
+
+
+
+
+      {id:45,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Dance Academy',url:'http://ssc-appsvr01:90/Club/Summary/5161'},
+      {id:46,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Dance Academy',url:'http://ssc-appsvr01:90/Club/Summary/5161'},
+      {id:47,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Dance Academy',url:'http://ssc-appsvr01:90/Club/Summary/5161'},
+      {id:48,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Dance Academy',url:'http://ssc-appsvr01:90/Club/Summary/5161'},
+      {id:49,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Jets Volleyball CLub',url:'http://ssc-appsvr01:90/Club/Summary/8207'},
+      {id:50,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Jets Volleyball CLub',url:'http://ssc-appsvr01:90/Club/Summary/8207'},
+      {id:51,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Jets Volleyball CLub',url:'http://ssc-appsvr01:90/Club/Summary/8207'},
+      {id:52,label:'Club',shape:'circle',color:'#97C2FF',title:'Edinburgh Jets Volleyball CLub',url:'http://ssc-appsvr01:90/Club/Summary/8207'},
+      {id:53,label:'Club',shape:'circle',color:'#97C2FF',title:'Forrester RFC',url:'http://ssc-appsvr01:90/Club/Summary/6948'},
+      {id:54,label:'Club',shape:'circle',color:'#97C2FF',title:'Forrester RFC',url:'http://ssc-appsvr01:90/Club/Summary/6948'},
+      {id:55,label:'Club',shape:'circle',color:'#97C2FF',title:'Forrester RFC',url:'http://ssc-appsvr01:90/Club/Summary/6948'},
+      {id:56,label:'Club',shape:'circle',color:'#97C2FF',title:'Forrester RFC',url:'http://ssc-appsvr01:90/Club/Summary/6948'},
+
+
+
+
+
+      {id:62,label:'Club',shape:'circle',color:'#97C2FF',title:'Heart of Midlothian Football Club',url:'http://ssc-appsvr01:90/Club/Summary/2246'},
+
+
+
+
+
+
+
+
+
+
+
+
+      {id:75,label:'Club',shape:'circle',color:'#97C2FF',title:'Peter Harkess Taekwondo',url:'http://ssc-appsvr01:90/Club/Summary/3483'},
+      {id:76,label:'Club',shape:'circle',color:'#97C2FF',title:'Peter Harkess Taekwondo',url:'http://ssc-appsvr01:90/Club/Summary/3483'},
+
+
+
+
+
+
+    ]);
+
+    return nodes;
+  };
+
+  function edgeSalvenson3718() {
+
+    // create an array with edges
+    var edges = new vis.DataSet([
+      { from: 2, to: 1 },
+      { from: 3, to: 1 },
+      { from: 4, to: 1 },
+      { from: 5, to: 1 },
+      { from: 6, to: 1 },
+      { from: 2, to: 7 },
+      { from: 2, to: 8 },
+      { from: 2, to: 9 },
+      { from: 2, to: 10 },
+      { from: 2, to: 11 },
+      { from: 2, to: 12 },
+      { from: 2, to: 13 },
+      { from: 2, to: 14 },
+      { from: 2, to: 15 },
+      { from: 2, to: 16 },
+      { from: 2, to: 17 },
+      { from: 2, to: 18 },
+      { from: 2, to: 19 },
+      { from: 2, to: 20 },
+      { from: 2, to: 21 },
+      { from: 2, to: 22 },
+      { from: 2, to: 23 },
+      { from: 3, to: 7 },
+      { from: 3, to: 8 },
+      { from: 4, to: 8 },
+      { from: 5, to: 8 },
+      { from: 6, to: 8 },
+      { from: 3, to: 29 },
+      { from: 4, to: 30 },
+      { from: 5, to: 31 },
+      { from: 4, to: 32 },
+      { from: 5, to: 33 },
+      { from: 4, to: 34 },
+      { from: 5, to: 35 },
+      { from: 3, to: 36 },
+      { from: 4, to: 37 },
+      { from: 5, to: 38 },
+      { from: 6, to: 39 },
+      { from: 3, to: 40 },
+      { from: 3, to: 12 },
+      { from: 4, to: 12 },
+      { from: 5, to: 12 },
+      { from: 6, to: 12 },
+      { from: 3, to: 45 },
+      { from: 4, to: 46 },
+      { from: 5, to: 47 },
+      { from: 6, to: 48 },
+      { from: 3, to: 49 },
+      { from: 4, to: 50 },
+      { from: 5, to: 51 },
+      { from: 6, to: 52 },
+      { from: 3, to: 53 },
+      { from: 4, to: 54 },
+      { from: 5, to: 55 },
+      { from: 6, to: 56 },
+      { from: 3, to: 13 },
+      { from: 4, to: 13 },
+      { from: 5, to: 13 },
+      { from: 6, to: 13 },
+      { from: 3, to: 14 },
+      { from: 3, to: 62 },
+      { from: 3, to: 15 },
+      { from: 4, to: 15 },
+      { from: 5, to: 15 },
+      { from: 6, to: 15 },
+      { from: 3, to: 17 },
+      { from: 4, to: 17 },
+      { from: 5, to: 17 },
+      { from: 6, to: 17 },
+      { from: 3, to: 19 },
+      { from: 4, to: 19 },
+      { from: 5, to: 19 },
+      { from: 6, to: 19 },
+      { from: 3, to: 75 },
+      { from: 5, to: 76 },
+      { from: 3, to: 23 },
+      { from: 4, to: 23 },
+      { from: 5, to: 23 },
+      { from: 6, to: 23 },
+
+
+    ]);
+
+    return edges;
+  }
+
+
+
+</script>
