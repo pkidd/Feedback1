@@ -1,0 +1,98 @@
+﻿
+
+@{
+  ViewData["Title"] = "Request for feedback";
+}
+
+<style>
+ 
+  </style>
+
+
+<div class="container">
+
+  
+  <div class="panel panel-default">
+
+    <div class="jumbotron">
+      <h1>Feedback request</h1>
+    </div>
+
+    <div class="panel-heading">
+      <h3 class="panel-title">What team are you requesting freedback from?</h3>
+      
+     
+       
+        <select class="form-control" id="TeamSelection" name="TeamSelection">
+          <option value=""></option>
+          <option value="1">Communications</option>
+          <option value="2">Strategy Planning</option>
+          <option value="3">IT Software Development</option>
+          <option value="4">IT Infrastructure</option>
+          <option value="5">Finance</option>
+          <option value="6">Human Resources</option>
+        </select>
+     
+    </div>
+    
+    <div class="panel-heading">
+      <h3 class="panel-title">What is it related to?</h3>
+      <div class="form-horizontal">
+        <div class="row">
+
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <select class="form-control " id="TeamTags" name="TeamTags">
+              <option value=""></option>
+              <option value="1">Project 1</option>
+              <option value="2">Project 2</option>
+              <option value="3">Project 3</option>
+              <option value="4">Project 4</option>
+              <option value="5">Project 5</option>
+              <option value="6">Project 6</option>
+            </select>
+          </div>
+
+          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+              <label for="NewTag">New Tag:</label>
+              <input type="text" id="NewTag" />
+              <button class="btn">Add</button>
+
+            </div>
+          </div>
+        </div>
+    </div>
+
+  
+    <div class="panel-heading">
+      <h3 class="panel-title">Description of work completed by the team.</h3>
+      
+      
+        <textarea class="form-control" rows="5" id="NotWell"></textarea>
+      
+
+      </div>
+
+
+
+    <div class="panel-body">
+      <div>
+        <a href="@Url.Action("List", "Feedback")" class="btn btn-primary pull-right">Save</a>
+        <a href="@Url.Action("List", "Feedback")" class="btn btn-primary pull-right">Submit</a>
+
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+
+  
+  </div>
+
+ 
+</div>
+

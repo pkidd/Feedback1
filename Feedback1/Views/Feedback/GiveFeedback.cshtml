@@ -1,0 +1,118 @@
+﻿
+@{
+  ViewData["Title"] = "GiveFeedback";
+}
+
+
+
+<style>
+ 
+  </style>
+
+
+
+<div class="container">
+
+  
+  <div class="panel panel-default">
+    
+    <div class="jumbotron">
+      <h1>Feedback request</h1>
+    </div>
+    <div class="panel-heading">
+      <h3 class="panel-title">Request From : Communications team</h3>
+    </div>
+
+    <div class="panel-heading">
+      <h3 class="panel-title">Related to : ASMO 3</h3>
+    </div>
+
+    <div class="panel-heading">
+      <h3 class="panel-title">Description</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <p>The delivery of the ASMO conference to 800 deligates</p>
+      </div>
+
+    </div>
+    
+    <div class="panel-heading">
+      <h3 class="panel-title">Please rate your experiance with the team related to this piece of work.</h3>
+    </div>
+    <div class="panel-body">
+      <div class="star-rating">
+
+        <div class="star-rating__wrap">
+          <input class="star-rating__input" id="star-rating-5" type="radio" name="rating" value="5">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"></label>
+          <input class="star-rating__input" id="star-rating-4" type="radio" name="rating" value="4">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+          <input class="star-rating__input" id="star-rating-3" type="radio" name="rating" value="3">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+          <input class="star-rating__input" id="star-rating-2" type="radio" name="rating" value="2">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+          <input class="star-rating__input" id="star-rating-1" type="radio" name="rating" value="1">
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+        </div>
+      </div>
+
+    </div>
+    
+    
+    <div class="panel-heading">
+      <h3 class="panel-title">What went well?</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <textarea class="form-control" rows="5" id="Well"></textarea>
+      </div>
+
+    </div>
+    
+    <div class="panel-heading">
+      <h3 class="panel-title">What did not go well?</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <textarea class="form-control" rows="5" id="NotWell"></textarea>
+      </div>
+
+    </div>
+    
+    
+    <div class="panel-heading">
+      <h3 class="panel-title">What is the one thing we can do to improve your experience?</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <textarea class="form-control" rows="5" id="Improvement"></textarea>
+      </div>
+
+    </div>
+    
+     
+    <div class="panel-body">
+      <div>
+        <a href="@Url.Action("List", "Feedback")" class="btn btn-primary pull-right">Save</a>
+        <a href="@Url.Action("List", "Feedback")" class="btn btn-primary pull-right">Submit</a>
+
+
+      </div>
+
+    </div>
+     
+      
+
+   
+  </div>
+
+
+  
+
+
+ 
+</div>
+
+
+

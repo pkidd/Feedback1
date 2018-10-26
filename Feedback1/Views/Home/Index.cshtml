@@ -1,0 +1,72 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
+            <div class="carousel-caption" role="option">
+                @*<p>
+                    Learn how to build ASP.NET apps that can run anywhere.
+                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
+                        Learn More
+                    </a>
+                </p>*@
+            </div>
+        </div>
+      
+    </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="row">
+  <div class="col-md-3">
+    <h2>What</h2>
+    Asking your collegues for feedback on work you have delivered.<br /><br />
+    Creating opportunities to reflect on the work the team is delivering performance or goals. <br /><br />
+    This ensures that all team members receive the same message, and the group can work toward solutions to the problem if necessary.<br />
+  </div>
+    <div class="col-md-3">
+        <h2>Why</h2>
+        
+      When done in the right way and with the right intentions, feedback can lead to outstanding performance. <br /><br />
+      Employees have to know what they are doing well and not so well. <br /><br />
+      For them to really hear your thoughts and suggestions on ways to improve, though, that feedback has to be delivered carefully and frequently. 
+        
+    </div>
+    <div class="col-md-3">
+        <h2>How</h2>
+        
+      Giving feedback is a skill. And like all skills, it takes practice to get it right. <br /><br />
+      So we'll give some tips on how you can give feedback constructively and effectively.<br /><br />
+        <ul>
+          <li>@Html.ActionLink("Ask for feedback", "Item", "Feedback")</li>
+          <li> @Html.ActionLink("Review your teams feedback", "Item", "Feedback" )</li>
+          <li> @Html.ActionLink("Tips", "Item", "Feedback")</li>
+           
+        </ul>
+    </div>
+    <div class="col-md-3">
+      <h2>Reporting</h2>
+      This project is not only about creating a mechanism where teams can povide feedback on work done, but allow us to see where connections are being made throughout the teams and to what extent.<br /><br />
+      <ul>
+        <li>  @Html.ActionLink("Your team links", "Item", "Feedback") </li>
+        <li>  @Html.ActionLink("All business links", "Item", "Feedback") </li>
+        <li>  @Html.ActionLink("Top feedback", "Item", "Feedback") </li>
+        <li>  @Html.ActionLink("Latest business activities completed", "Item", "Feedback") </li>
+      </ul>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+﻿
+@{
+  ViewData["Title"] = "ProvidedFeedback";
+}
+
+
+
+<div class="container">
+
+
+  <div class="panel panel-default">
+
+    <div class="jumbotron">
+      <h2>From:  Strategy Planning team</h2>     
+    </div>
+
+
+    <div class="panel-heading">
+      <h3 class="panel-title">Related to : <b>ASMO 3</b></h3>
+    </div>
+
+    <div class="panel-heading">
+      <h3 class="panel-title">Description</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <p>The delivery of the ASMO conference to 800 deligates</p>
+      </div>
+
+    </div>
+
+    @*https://w3resource.com/icon/font-awesome/web-application-icons/star-half-full.php*@
+
+    <div class="panel-heading">
+      <h3 class="panel-title">They rated us:</h3>
+    </div>
+    <div class="panel-body">
+      <div class="star-rating">
+
+        <div class="star-rating__wrap">
+          
+          <label class="star-rating__ico fa fa-star-o fa-lg" for="star-rating-5" title="5 out of 5 stars"></label>
+         
+          <label class="star-rating__ico fa fa-star fa-lg" for="star-rating-4" title="4 out of 5 stars"></label>
+  
+          <label class="star-rating__ico fa fa-star fa-lg" for="star-rating-3" title="3 out of 5 stars"></label>
+        
+          <label class="star-rating__ico fa fa-star fa-lg" for="star-rating-2" title="2 out of 5 stars"></label>
+   
+          <label class="star-rating__ico fa fa-star fa-lg" for="star-rating-1" title="1 out of 5 stars"></label>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="panel-heading">
+      <h3 class="panel-title">What went well:</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <textarea class="form-control" rows="5" id="Well"></textarea>
+      </div>
+
+    </div>
+
+    <div class="panel-heading">
+      <h3 class="panel-title">What did not go well:</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <textarea class="form-control" rows="5" id="NotWell"></textarea>
+      </div>
+
+    </div>
+
+
+    <div class="panel-heading">
+      <h3 class="panel-title">The one thing that we can improve on:</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <textarea class="form-control" rows="5" id="Improvement"></textarea>
+      </div>
+
+    </div>
+    
+    <div class="panel-heading">
+      <h3 class="panel-title">Sharing:</h3>
+    </div>
+    <div class="panel-body">
+      <div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="">Share with business activities</label>
+          <label><input type="checkbox" value="">Share with top feedback</label>
+          <label><input type="checkbox" value="">Share with Inside track</label>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="panel-body">
+      <div>
+        <a href="@Url.Action("List", "Feedback")" class="btn btn-primary pull-right">Save</a>
+        <a href="@Url.Action("List", "Feedback")" class="btn btn-primary pull-right">Completed</a>
+
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+
+
+
+
+
+</div>
