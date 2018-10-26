@@ -123,11 +123,12 @@
 
     var nodes = new vis.DataSet([
       {id:1,label:'Your Team',shape:'circle',color:'#ADFFEA',title:'Communications',url:' '},
-      {id:2,label:'Strategy Planning',shape:'circle',color:'#97C2FC',title:'Strategy Planning',url:' '},
-      {id:3,label:'IT Software Development',shape:'circle',color:'#97C2FC',title:'IT Software Development',url:' '},
-      {id:4,label:'IT Infrastructure',shape:'circle',color:'#97C2FC',title:'IT Infrastructure',url:' '},
+      {id:2,label:'Strat Plan',shape:'circle',color:'#97C2FC',title:'Strategy Planning',url:' '},
+      {id:3,label:'IT Software',shape:'circle',color:'#97C2FC',title:'IT Software Development',url:' '},
+      {id:4,label:'Infrastructure',shape:'circle',color:'#97C2FC',title:'IT Infrastructure',url:' '},
       {id:5,label:'Finance',shape:'circle',color:'#97C2FC',title:'Finance',url:' '},
       {id:6,label:'Human Resources',shape:'circle',color:'#97C2FC',title:'Human Resources',url:' '},
+
 
     ]);
 
@@ -137,13 +138,16 @@
     // create an array with edges
     var edges = new vis.DataSet([
       {from: 1, to: 2, value: 4, title: "You supported this team 4 times", arrows: "to"},
-      {from: 1, to: 3, value: 2, title: "You supported this team 2 times", arrows: "to"},
-      {from: 1, to: 4, value: 10, title: "You supported this team 10 times", arrows: "to"},
+      {from: 1, to: 4, value: 2, title: "You supported this team 2 times", arrows: "to"},
       {from: 1, to: 5, value: 1, title: "You supported this team 1 times", arrows: "to"},
-      {from: 2, to: 1, value: 2, title: "You were supported by this team 2 times", arrows: "to"},
-      {from: 3, to: 1, value: 6, title: "You were supported by this team 6 times", arrows: "to"},
-      {from: 4, to: 1, value: 13, title: "You were supported by this team 13 times", arrows: "to"},
-      {from: 5, to: 1, value: 2, title: "You were supported by this team 2 times", arrows: "to"},
+      {from: 2, to: 1, value: 3, title: "You were supported by this team 3 times", arrows: "to"},
+      {from: 3, to: 1, value: 5, title: "You were supported by this team 5 times", arrows: "to"},
+      {from: 4, to: 1, value: 7, title: "You were supported by this team 7 times", arrows: "to"},
+
+
+
+
+
 
 
 
