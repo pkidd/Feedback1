@@ -33,6 +33,10 @@
         "img/network/upArrow.png",
         "img/network/zoomExtends.png"
       ]
+    },
+    {
+      "library": "jqueryui@1.12.1",
+      "destination": "wwwroot/jqueryui/"
     }
   ]
 }

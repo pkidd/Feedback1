@@ -53,9 +53,10 @@
     Giving feedback is a skill. And like all skills, it takes practice to get it right. <br /><br />
     So we'll give some tips on how you can give feedback constructively and effectively.<br /><br />
     <ul>
-      <li>@Html.ActionLink("Ask for feedback", "Item", "Feedback")</li>
-      <li> @Html.ActionLink("Review your teams feedback", "Item", "Feedback" )</li>
-      <li> @Html.ActionLink("Tips", "Item", "Feedback")</li>
+      <li>@Html.ActionLink("Ask for feedback", "RequestFeedback", "Feedback", new { Id = 0 })</li>
+          
+      <li> @Html.ActionLink("Review your teams feedback", "List", "Feedback" )</li>
+      <li> @Html.ActionLink("Tips", "TipsFeedback", "Feedback")</li>
            
     </ul>
   </div>
@@ -64,9 +65,9 @@
     This project is not only about creating a mechanism where teams can povide feedback on work done, but allow us to see where connections are being made throughout the teams and to what extent.<br /><br />
     <ul>
       <li>  @Html.ActionLink("Your team links", "TeamNetwork", "Feedback") </li>
-      <li>  @Html.ActionLink("All business links", "Item", "Feedback") </li>
-      <li>  @Html.ActionLink("Top feedback", "Item", "Feedback") </li>
-      <li>  @Html.ActionLink("Latest business activities completed", "Item", "Feedback") </li>
+      <li>  @Html.ActionLink("All business links", "AllNetwork", "Feedback") </li>
+      <li>  @Html.ActionLink("Top feedback", "TopFeedback", "Feedback") </li>
+      <li>  @Html.ActionLink("Latest business activities completed", "LatestCompleted", "Feedback") </li>
     </ul>
   </div>
 </div>

@@ -97,8 +97,54 @@ namespace Feedback1.Controllers
 			    ToTeam = "Your team",
 			    Title = "Request 1"
 		    };
-			return View(model);
-		}
+				return View(model);
+				}
+
+
+	    public IActionResult AllNetwork()
+	    {
+		    var model = new FeedbackRequest()
+		    {
+			    FromTeam = "All Teams",
+			    ToTeam = "All Teams",
+			    Title = "Requests"
+		    };
+		    return View(model);
+	    }
+
+
+  public IActionResult TipsFeedback()
+	    {
+		    var model = new FeedbackRequest()
+		    {
+			    FromTeam = "All Teams",
+			    ToTeam = "All Teams",
+			    Title = "Requests"
+		    };
+		    return View(model);
+	    }
+
+  public IActionResult TopFeedback()
+	    {
+		    var model = new FeedbackRequest()
+		    {
+			    FromTeam = "All Teams",
+			    ToTeam = "All Teams",
+			    Title = "Requests"
+		    };
+		    return View(model);
+	    }
+
+  public IActionResult LatestCompleted()
+	    {
+		    var model = new FeedbackRequest()
+		    {
+			    FromTeam = "All Teams",
+			    ToTeam = "All Teams",
+			    Title = "Requests"
+		    };
+		    return View(model);
+	    }
 
 	}
 }
