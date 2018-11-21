@@ -26,7 +26,14 @@ namespace Feedback1.Controllers
 		        new FeedbackRequest() { FromTeam = "Human Resources", ToTeam = "Your team", Title = "Request 1", RequestedDateTime = DateTime.Today, Description = "desc 1 hsagdhag jsahd gadsjh asdh ", Status = "1 week old"},
 	        new FeedbackRequest() { FromTeam = "IT Software Development", ToTeam = "Your team", Title = "Request 2", RequestedDateTime = DateTime.Today, Description = "desc 2 hsagdhag jsahd gadsjh asdh ",Status = "2 days old" },
 	        new FeedbackRequest() { FromTeam = "IT Infrastructure", ToTeam = "Your team", Title = "Request 1", RequestedDateTime = DateTime.Today, Description = "desc 3 hsagdhag jsahd gadsjh asdh " ,Status = "new"},
-										}
+										},
+
+		        ArchivedFeedbackRequests = new List<FeedbackRequest>()
+		        {
+			        new FeedbackRequest() { FromTeam = "Human Resources", ToTeam = "Your team", Title = "Learning materials for staff", RequestedDateTime = DateTime.Today.AddDays(-60), Description = "desc 1 hsagdhag jsahd gadsjh asdh ", Status = "1 week old"},
+			        new FeedbackRequest() { FromTeam = "IT Software Development", ToTeam = "Your team", Title = "Re-organise dContacts and Organisations data", RequestedDateTime = DateTime.Today.AddDays(-72), Description = "desc 2 hsagdhag jsahd gadsjh asdh ",Status = "2 days old" },
+			        new FeedbackRequest() { FromTeam = "IT Infrastructure", ToTeam = "Your team", Title = "Comms plan for IT rollout of Sharepoint", RequestedDateTime = DateTime.Today.AddDays(-89), Description = "desc 3 hsagdhag jsahd gadsjh asdh " ,Status = "new"},
+		        }
 									};
 
 	     

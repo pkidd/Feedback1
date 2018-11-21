@@ -13,6 +13,8 @@ namespace Feedback1.Models
 		/* list of requests for feedback from other teams */
 		public IList<FeedbackRequest> OtherTeamFeedbackRequests { get; set; }
 
+		/* Past work completed */
+		public IList<FeedbackRequest> ArchivedFeedbackRequests { get; set; }
 
 	}
 

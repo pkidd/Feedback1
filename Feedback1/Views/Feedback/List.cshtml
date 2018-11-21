@@ -24,7 +24,7 @@
 
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-    <div class="box-header box-blue" data-toggle="collapse" data-target="#feedback_request-panel">
+    <div class="box-header box-blue" data-toggle="collapse" data-target="#requestsforfeedback-panel">
       <strong>Your requests for feedback - To</strong>
     
       <span class="glyphicon glyphicon-chevron-up pull-right"></span>
@@ -39,7 +39,7 @@
         <p>Once reviewed mark as review and flag if you wish to share the work item with the business. Include the feedback option available.</p>
 
       </div>
-      </div>
+    </div>
     <div>
       @if (Model.YourTeamFeedbackRequests == null)
       {
@@ -53,37 +53,37 @@
 
         <table class="table table-striped">
           <thead>
-            <tr>
-              <th>To</th>
-              <th>Requested</th>
-              <th>Title</th>
-              <th>Status</th>
-              <th> @Html.ActionLink("new request", "RequestFeedback", "Feedback", new { Id = 0 }, new { @class = "btn btn-primary btn-xs pull-right" })</th>
-            </tr>
+          <tr>
+            <th>To</th>
+            <th>Requested</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th> @Html.ActionLink("new request", "RequestFeedback", "Feedback", new { Id = 0 }, new { @class = "btn btn-primary btn-xs pull-right" })</th>
+          </tr>
           </thead>
           <tbody>
-            @foreach (var item in Model.YourTeamFeedbackRequests)
-            {
-              <tr>
-                <td class="col-md-2">@item.ToTeam</td>
-                <td class="col-md-1">@item.RequestedDateTime.ToString("dd/MM/yyyy") </td>
-                <td class="col-md-2">@item.Title</td>
-                <td class="col-md-3">@item.Status</td>
-                @if (@item.Status != "Feedback Available")
-                {
-                  <td class='col-md-1'>
-                    @Html.ActionLink("select", "RequestFeedback", "Feedback", new {Id = item.FeedbackRequestId}, new {@class = "btn btn-primary btn-xs pull-right"})
-                  </td>
-                }
-                else { 
-                  <td class='col-md-1'>
-                    @Html.ActionLink("select", "ProvidedFeedback", "Feedback", new { Id = item.FeedbackRequestId }, new { @class = "btn btn-primary btn-xs pull-right" })
-                  </td>
-                }
+          @foreach (var item in Model.YourTeamFeedbackRequests)
+          {
+            <tr>
+              <td class="col-md-2">@item.ToTeam</td>
+              <td class="col-md-1">@item.RequestedDateTime.ToString("dd/MM/yyyy") </td>
+              <td class="col-md-2">@item.Title</td>
+              <td class="col-md-3">@item.Status</td>
+              @if (@item.Status != "Feedback Available")
+              {
+                <td class='col-md-1'>
+                  @Html.ActionLink("select", "RequestFeedback", "Feedback", new {Id = item.FeedbackRequestId}, new {@class = "btn btn-primary btn-xs pull-right"})
+                </td>
+              }
+              else { 
+                <td class='col-md-1'>
+                  @Html.ActionLink("select", "ProvidedFeedback", "Feedback", new { Id = item.FeedbackRequestId }, new { @class = "btn btn-primary btn-xs pull-right" })
+                </td>
+              }
 
-              </tr>
-            }
-            <tr><td colspan="5"></td></tr>
+            </tr>
+          }
+          <tr><td colspan="5"></td></tr>
           </tbody>
         </table>
       }
@@ -92,7 +92,7 @@
   </div>
 
   <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-    <div class="box-header box-blue" data-toggle="collapse" data-target="#feedback_request-panel">
+    <div class="box-header box-blue" data-toggle="collapse" data-target="#feedbackrequests-panel">
       <strong>Teams requesting feedback - From</strong>
 
       <span class="glyphicon glyphicon-chevron-up pull-right"></span>
@@ -119,29 +119,29 @@
 
         <table class="table table-striped">
           <thead>
-            <tr>
-              <th>From</th>
-              <th>Requested</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th></th>
-            </tr>
+          <tr>
+            <th>From</th>
+            <th>Requested</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
           </thead>
           <tbody>
-            @foreach (var item in Model.OtherTeamFeedbackRequests)
-            {
-              <tr>
-                <td class="col-md-2">@item.FromTeam</td>
-                <td class="col-md-1">@item.RequestedDateTime.ToString("dd/MM/yyyy") </td>
-                <td class="col-md-2">@item.Title</td>
-                <td class="col-md-3">@item.Description</td>
-                <td class='col-md-1'>
-                  @Html.ActionLink("select", "GiveFeedback", "Feedback", new { Id = item.FeedbackRequestId }, new { @class = "btn btn-primary btn-xs" })
-                </td>
+          @foreach (var item in Model.OtherTeamFeedbackRequests)
+          {
+            <tr>
+              <td class="col-md-2">@item.FromTeam</td>
+              <td class="col-md-1">@item.RequestedDateTime.ToString("dd/MM/yyyy") </td>
+              <td class="col-md-2">@item.Title</td>
+              <td class="col-md-3">@item.Description</td>
+              <td class='col-md-1'>
+                @Html.ActionLink("select", "GiveFeedback", "Feedback", new { Id = item.FeedbackRequestId }, new { @class = "btn btn-primary btn-xs" })
+              </td>
 
-              </tr>
-            }
-            <tr><td colspan="5"></td></tr>
+            </tr>
+          }
+          <tr><td colspan="5"></td></tr>
           </tbody>
         </table>
       }
@@ -149,6 +149,69 @@
     </div>
   </div>
 
+</div>
+
+
+<div class="row">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+  <div class="box-header box-blue" data-toggle="collapse" data-target="#pastwork-panel">
+    <strong>Archived work</strong>
+
+    <span class="glyphicon glyphicon-chevron-up pull-right"></span>
+
   </div>
+  <div id="pastwork-panel" class="panel-collapse collapse in">
+    <div class="well">
+
+      <p>Past work completed - track your big projects and review your feedback from the recipients</p>
+    
+
+    </div>
+    
+    <div>
+      @if (Model.ArchivedFeedbackRequests == null)
+      {
+        <div class="alert alert-warning">
+          <strong>Note!</strong>Very quiet in here - please record some work that you have completed.
+        </div>
+
+      }
+      else
+      {
+
+        <table class="table table-striped">
+          <thead>
+          <tr>
+          
+            <th>Completed</th>
+            <th>Title</th>
+            <th>For</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          @foreach (var item in Model.ArchivedFeedbackRequests)
+          {
+            <tr>
+             
+              <td class="col-md-1">@item.RequestedDateTime.ToString("dd/MM/yyyy") </td>
+              <td class="col-md-2">@item.Title</td>
+              <td class="col-md-3">@item.FromTeam</td>
+              <td class='col-md-1'>
+                @Html.ActionLink("select", "GiveFeedback", "Feedback", new { Id = item.FeedbackRequestId }, new { @class = "btn btn-primary btn-xs" })
+              </td>
+
+            </tr>
+          }
+          <tr><td colspan="5"></td></tr>
+          </tbody>
+        </table>
+      }
+
+    </div>
+  </div>
+
+</div>
+</div>
 
     
