@@ -153,5 +153,16 @@ namespace Feedback1.Controllers
 		    return View(model);
 	    }
 
+
+
+	    public IActionResult TeamFeedbackChart()
+	    {
+		    var model = new FeedbackRequest()
+		    {
+			    
+		    };
+		    return View(model);
+	    }
+
 	}
 }
